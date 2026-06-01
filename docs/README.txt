@@ -1,5 +1,5 @@
 ACEhole - ACE Asheron's Call Server Manager
-Version 0.0.2
+Version 0.0.5
 Author: Ftuoil Xelrash
 ===========================================
 
