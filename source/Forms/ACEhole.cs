@@ -93,6 +93,7 @@ namespace ACEhole
 
             var ver = Assembly.GetExecutingAssembly().GetName().Version;
             statVersionLabel.Text = $"v{ver.Major}.{ver.Minor}.{ver.Build}";
+            PositionVersionLabel();
 
             RestoreWindowPosition();
 
@@ -203,7 +204,12 @@ namespace ACEhole
             statUptimeValue  = AddBarFixed("--",        241, 21, 62, font, dashColor);
             AddBarFixed("Memory:", 305,  21, 60, font, staticColor);
             statMemoryValue  = AddBarFixed("--",        366, 21, 52, font, dashColor);
-            // statVersionLabel is already positioned in Designer.cs (x=650, Anchor=Right)
+            statusInfoPanel.Resize += (s, e) => PositionVersionLabel();
+        }
+
+        private void PositionVersionLabel()
+        {
+            statVersionLabel.Left = statusInfoPanel.Width - statVersionLabel.Width - 8;
         }
 
         private Label AddBarFixed(string text, int x, int y, int w, Font font, Color color,
@@ -717,11 +723,23 @@ namespace ACEhole
 
         private void stopServerButton_Click(object sender, EventArgs e)
         {
+            if (_processManager.IsRunning)
+            {
+                var r = MessageBox.Show("Stop the ACE server?", "Stop Server",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (r != DialogResult.Yes) return;
+            }
             _ = _processManager.StopServerAsync();
         }
 
         private void restartServerButton_Click(object sender, EventArgs e)
         {
+            if (_processManager.IsRunning)
+            {
+                var r = MessageBox.Show("Restart the ACE server?", "Restart Server",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (r != DialogResult.Yes) return;
+            }
             _ = _processManager.RestartServerAsync();
         }
 
