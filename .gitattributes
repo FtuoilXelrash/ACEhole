@@ -1,0 +1,3 @@
+# Exclude README.md and .gitattributes from release archives
+README.md export-ignore
+.gitattributes export-ignore
