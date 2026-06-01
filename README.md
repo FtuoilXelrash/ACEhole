@@ -1,6 +1,6 @@
 # ACEhole
 
-![Version](https://img.shields.io/badge/version-0.0.1-blue.svg)
+![Version](https://img.shields.io/badge/version-0.0.2-blue.svg)
 [![.NET](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/download/dotnet/8.0)
 [![License](https://img.shields.io/badge/license-GPLv3-green.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
@@ -9,7 +9,7 @@ A Windows Forms application for managing and supervising a locally-hosted ACE (A
 Emulator) Dedicated Server. Replaces the batch-file restart loop with a protected GUI that launches,
 monitors, and auto-restarts the server — with live console output and process supervision.
 
-**Current Version:** 0.0.1
+**Current Version:** 0.0.2
 
 ## Features
 
@@ -121,17 +121,6 @@ monitors, and auto-restarts the server — with live console output and process 
    msbuild ACEhole.sln /p:Configuration=Release
    ```
 3. Compiled executable: `bin\Release\net8.0-windows10.0.17763.0\ACEhole.exe`
-
-## Scripts (all under `scripts\`)
-
-| Script | Purpose |
-|---|---|
-| `test-cert_and_build.ps1` | Build signed MSIX for local test install (run as Admin) |
-| `release-build.ps1` | Build unsigned MSIX for MS Store submission |
-| `installed_app-certification.ps1` | Run WACK against installed package |
-| `packaged_app-certification.ps1` | Run WACK against MSIX package file |
-| `backup_project.ps1` | Timestamped project backup |
-| `increment_version.ps1` | Auto-increment AssemblyInfo version |
 
 ## Directory Structure
 
