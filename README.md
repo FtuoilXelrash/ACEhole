@@ -1,6 +1,6 @@
 # ACEhole
 
-![Version](https://img.shields.io/badge/version-0.0.2-blue.svg)
+![Version](https://img.shields.io/badge/version-0.0.5-blue.svg)
 [![.NET](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/download/dotnet/8.0)
 [![License](https://img.shields.io/badge/license-GPLv3-green.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://www.microsoft.com/windows)
@@ -9,7 +9,7 @@ A Windows Forms application for managing and supervising a locally-hosted ACE (A
 Emulator) Dedicated Server. Replaces the batch-file restart loop with a protected GUI that launches,
 monitors, and auto-restarts the server — with live console output and process supervision.
 
-**Current Version:** 0.0.2
+**Current Version:** 0.0.5
 
 ## Features
 
