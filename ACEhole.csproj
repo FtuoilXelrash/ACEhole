@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>ACEhole</RootNamespace>
+    <AssemblyName>ACEhole</AssemblyName>
+    <Nullable>disable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
+    <ApplicationIcon>resources\images\ACEhole.ico</ApplicationIcon>
+    <ProjectGuid>{C2D4E6F8-A1B3-4C5D-8E9F-0A1B2C3D4E5F}</ProjectGuid>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <!-- About image embedded in binary -->
+  <ItemGroup>
+    <EmbeddedResource Include="resources\images\ACEhole_about.png" />
+  </ItemGroup>
+
+  <!-- Sound files - copy to sounds\ in output -->
+  <ItemGroup>
+    <Content Include="resources\sounds\server_start.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>sounds\server_start.wav</TargetPath>
+    </Content>
+    <Content Include="resources\sounds\server_stop.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>sounds\server_stop.wav</TargetPath>
+    </Content>
+  </ItemGroup>
+
+  <!-- Documentation - copy to docs\ in output -->
+  <ItemGroup>
+    <Content Include="docs\README.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\ACEhole.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- Non-compiled project files visible in Solution Explorer -->
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="devnotes\changes.md" />
+    <None Include="devnotes\todo.md" />
+    <None Include="README.md" />
+  </ItemGroup>
+
+</Project>
