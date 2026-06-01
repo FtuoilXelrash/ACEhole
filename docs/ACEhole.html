@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ACEhole — User Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #1e1e1e; color: #d4d4d4; font-family: Segoe UI, sans-serif; font-size: 14px; line-height: 1.6; }
+  .header { background: #1a2a3a; border-bottom: 3px solid #4e9ad0; padding: 32px 48px; }
+  .header h1 { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .header .sub { color: #9cdcfe; font-size: 15px; }
+  .content { max-width: 860px; margin: 0 auto; padding: 36px 48px; }
+  h2 { font-size: 18px; font-weight: 600; color: #9cdcfe; margin: 32px 0 12px 0;
+       border-bottom: 1px solid #2d2d30; padding-bottom: 6px; }
+  h3 { font-size: 15px; font-weight: 600; color: #ccc; margin: 20px 0 8px 0; }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 8px 0 12px 24px; }
+  li { margin-bottom: 4px; }
+  code { background: #252526; color: #ce9178; padding: 2px 6px; border-radius: 3px;
+         font-family: Consolas, monospace; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  th { background: #2d2d30; color: #9cdcfe; text-align: left; padding: 8px 12px; font-size: 13px; }
+  td { padding: 7px 12px; border-top: 1px solid #2d2d30; font-size: 13px; vertical-align: top; }
+  .note { background: #2a2d1a; border-left: 3px solid #b5c700; padding: 10px 16px;
+          border-radius: 0 4px 4px 0; margin: 12px 0; font-size: 13px; color: #d4d4a4; }
+  .footer { padding: 24px 48px; color: #555; font-size: 12px;
+            border-top: 1px solid #2d2d30; margin-top: 48px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>ACEhole</h1>
+  <div class="sub">ACE Asheron's Call Server Manager &mdash; User Guide &mdash; Version 0.0.2</div>
+</div>
+
+<div class="content">
+
+<h2>Overview</h2>
+<p>ACEhole is a Windows desktop application for managing and supervising a locally-hosted
+ACE (Asheron's Call Emulator) server. It replaces the manual batch-file restart loop with
+a protected GUI that launches <code>ACE.Server.exe</code>, monitors it, and auto-restarts it
+on crash — all in a single window that protects the server from accidental closes.</p>
+
+<p>ACE is a headless console application with no graphical interface. A single mis-aimed
+click can terminate the server process. ACEhole solves this by running the server inside
+a protected host process and displaying its output in a readable, color-coded console.</p>
+
+<h2>Quick Start</h2>
+<ol>
+  <li>Open <strong>View → Settings → Server Settings</strong></li>
+  <li>On the <strong>Paths</strong> sub-tab, verify:
+    <ul>
+      <li><strong>ACE Executable</strong> — path to <code>ACE.Server.exe</code></li>
+      <li><strong>Log File Path</strong> — path to the ACE server log file</li>
+    </ul>
+  </li>
+  <li>Click <strong>▶ Start Server</strong></li>
+  <li>The Server Console tab shows all output. The status bar updates with process metrics.</li>
+</ol>
+
+<div class="note">ACEhole tails the ACE log file for console output rather than redirecting
+stdout. The log file location is set in ACE's <code>log4net.config</code> file in the server
+directory. The default path configured in ACEhole is <code>Z:\ACE TEST\Logs\FULL\ACE_Log.txt</code>.
+Update this in Settings if your log file is in a different location.</div>
+
+<h2>Server Console Tab</h2>
+<p>The main tab shows live output from <code>ACE.Server.exe</code>, color-coded by message type:</p>
+<ul>
+  <li><strong>Joins/Leaves</strong> — player connection events (green)</li>
+  <li><strong>Chat</strong> — global chat messages (cyan)</li>
+  <li><strong>Errors</strong> — server errors and exceptions (red)</li>
+  <li><strong>Warnings</strong> — server warnings (orange)</li>
+  <li><strong>MODs</strong> — mod system messages (purple)</li>
+  <li><strong>Saves</strong> — server save operations (teal)</li>
+  <li><strong>Default</strong> — all other output (gray)</li>
+</ul>
+
+<h3>Console Commands</h3>
+<p>The <strong>Console Commands</strong> bar sends commands to the server via stdin. Type a
+command and press Enter. The last 20 commands are saved in the dropdown for quick reuse.
+The history size is configurable in Settings → UI Settings → General.</p>
+
+<h3>Global Chat</h3>
+<p>The <strong>Global Chat</strong> bar sends a broadcast message to all players. The chat
+command format will be confirmed once ACE console command documentation is available.
+Chat history (last 20) is persisted across sessions.</p>
+
+<h3>Repeated Line Suppression</h3>
+<p>Consecutive identical lines (e.g., repeated connection errors) are collapsed into a
+single suppression notice showing the count. This keeps the console readable during
+network storms. Toggle in Settings → UI Settings → General → <em>Suppress repeated
+console lines</em>.</p>
+
+<h2>Server Status Tab</h2>
+<p>Shows process-level metrics and server data. Populated primarily from the running process.
+Future versions will parse additional data from console output.</p>
+
+<table>
+  <tr><th>Group</th><th>Fields</th></tr>
+  <tr><td>Server Status</td><td>Server Name, Log File Status</td></tr>
+  <tr><td>Process Monitor</td><td>State, PID, CPU %, RAM</td></tr>
+  <tr><td>Population Data</td><td>Players Online, Max Players</td></tr>
+  <tr><td>World Data</td><td>In-Game Time (future)</td></tr>
+  <tr><td>Server Data</td><td>Memory, Network In/Out, Uptime</td></tr>
+  <tr><td>Player Database</td><td>Total Players (future)</td></tr>
+  <tr><td>MODs</td><td>Total MODs, Loaded, In Error (future)</td></tr>
+</table>
+
+<h2>Status Bar</h2>
+<p>Always visible at the bottom of the window across all tabs:</p>
+<ul>
+  <li><strong>Row 1</strong>: Players Online</li>
+  <li><strong>Row 2</strong>: State · Uptime · Memory — version right-aligned</li>
+</ul>
+<p>Values are green when populated, orange when zero, gray when server is stopped.</p>
+
+<h2>MODs Tab</h2>
+<p>Placeholder for future ACE MOD management. Will include MOD listing, enable/disable
+controls, and a MOD notifications feed. Current version shows a placeholder message.</p>
+
+<h2>Server Configuration Tab</h2>
+<p>Placeholder for future ACE server configuration editing. Will include tabs for
+scheduled operations, static options, and dynamic server settings via console commands.</p>
+
+<h2>Settings Dialog</h2>
+<p>Open via <strong>View → Settings</strong>. The dialog is modeless — the main window
+remains usable while Settings is open. Position is remembered between sessions.</p>
+
+<h3>Server Settings</h3>
+<table>
+  <tr><th>Sub-tab</th><th>Setting</th><th>Default</th><th>Description</th></tr>
+  <tr><td>Paths</td><td>ACE Executable</td><td><code>Z:\ACE TEST\ACE.Server.exe</code></td><td>Full path to ACE.Server.exe</td></tr>
+  <tr><td>Paths</td><td>Log File Path</td><td><code>Z:\ACE TEST\Logs\FULL\ACE_Log.txt</code></td><td>ACE server log file to tail</td></tr>
+  <tr><td>Cycles</td><td>Auto-restart on crash</td><td>On</td><td>Restart after unexpected process exit</td></tr>
+  <tr><td>Cycles</td><td>Crash restart delay</td><td>5s</td><td>Wait time before auto-restart</td></tr>
+</table>
+
+<h3>UI Settings — General</h3>
+<ul>
+  <li><strong>Theme</strong> — Light / Dark / System (follows Windows setting)</li>
+  <li><strong>24-hour time format</strong> — toggle 12/24 hour in timestamps</li>
+  <li><strong>Minimize to tray on close</strong> — when server is running, shows a
+    Hide/Stop/Cancel prompt instead of exiting</li>
+  <li><strong>Auto-refresh Server Status</strong> — refresh interval in seconds</li>
+  <li><strong>Suppress repeated console lines</strong> — collapse flood messages</li>
+  <li><strong>Export/Import Config</strong> — backup and restore all settings</li>
+  <li><strong>Command/Chat history size</strong> — max entries to persist per dropdown</li>
+</ul>
+
+<h3>UI Settings — Windows</h3>
+<p>Per-window always-on-top and show-in-taskbar toggles for Main Window, Log Viewer,
+and Settings. Position reset buttons to return each window to its default position.</p>
+
+<h3>Logs — Log Files</h3>
+<ul>
+  <li><strong>Max log file size</strong> — rotate when file exceeds this size (MB)</li>
+  <li><strong>Log files to retain</strong> — keep this many files per log type</li>
+  <li><strong>Enable debug logging</strong> — write DEBUG entries to the App log</li>
+  <li><strong>Auto-delete old log files</strong> — enforce the retention limit on startup</li>
+</ul>
+
+<h3>Logs — Log Colors</h3>
+<p>Click any color swatch to open a color picker. Changes apply immediately to new console
+output. Separate toggles for console output and Log Viewer. Reset to Defaults restores
+all colors to the factory values.</p>
+
+<h3>Notifications — Tray</h3>
+<ul>
+  <li><strong>Enable tray notifications</strong> — master toggle for balloon notifications</li>
+  <li><strong>Show notification on server start/stop</strong></li>
+</ul>
+
+<h3>Notifications — Sound</h3>
+<ul>
+  <li><strong>Play sound on server start</strong> — plays <code>server_start.wav</code></li>
+  <li><strong>Play sound on server stop</strong> — plays <code>server_stop.wav</code></li>
+</ul>
+
+<h2>Log Viewer</h2>
+<p>Open via <strong>View → Log Files</strong> or the <strong>Log Files</strong> toolbar button.
+A floating window that shows Application and Console logs:</p>
+<ul>
+  <li>Navigate dates with ◄ ► buttons</li>
+  <li>Switch between Application log (color-coded by INFO/WARN/ERROR/DEBUG) and
+    Console log (color-coded by message type)</li>
+  <li>Live tail: today's log updates in real time</li>
+  <li>Smart auto-scroll: follows new output unless you scroll up</li>
+  <li>Save Log and Delete Log buttons</li>
+</ul>
+
+<h2>System Tray</h2>
+<ul>
+  <li>Minimize to tray when server is running (configured in Settings)</li>
+  <li>Double-click tray icon to restore the window</li>
+  <li>Right-click for context menu: Open / Exit</li>
+</ul>
+
+<h2>File Locations (Release)</h2>
+<table>
+  <tr><th>Path</th><th>Contents</th></tr>
+  <tr><td><code>%LocalAppData%\ACEhole\data\config.json</code></td><td>Application settings</td></tr>
+  <tr><td><code>%LocalAppData%\ACEhole\logs\App\</code></td><td>Application log files</td></tr>
+  <tr><td><code>%LocalAppData%\ACEhole\logs\Console\</code></td><td>Server console session logs</td></tr>
+</table>
+
+<h2>Requirements</h2>
+<ul>
+  <li>Windows 10 or higher (64-bit)</li>
+  <li>.NET 8.0 Runtime</li>
+  <li>ACE Dedicated Server with a valid configuration</li>
+</ul>
+
+</div>
+
+<div class="footer">
+  ACEhole v0.0.2 &mdash; Author: Ftuoil Xelrash &mdash; License: GPLv3
+</div>
+
+</body>
+</html>
