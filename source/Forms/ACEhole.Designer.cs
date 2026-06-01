@@ -278,7 +278,7 @@ namespace ACEhole
             // Version label — far right, row 2 (y=21), same as rServed
             this.statVersionLabel.AutoSize  = false;
             this.statVersionLabel.Size      = new System.Drawing.Size(180, 13);
-            this.statVersionLabel.Anchor    = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            this.statVersionLabel.Anchor    = System.Windows.Forms.AnchorStyles.None;
             this.statVersionLabel.Location  = new System.Drawing.Point(650, 21);
             this.statVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.statVersionLabel.Font      = new System.Drawing.Font("Segoe UI", 8.25f);
